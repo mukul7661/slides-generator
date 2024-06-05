@@ -18,7 +18,7 @@ async function generateImage(description) {
   console.log(imageUrl);
 
   // const imageUrl =
-  //   "https://oaidalleapiprodscus.blob.core.windows.net/private/org-KXKumtFebzRZTj3qnvXNk0Ke/user-jk69vqRB1j9QjlqVUFVZQjiV/img-aY1DAN8ceORYqhG2pwNeAuqh.png?st=2024-06-05T08%3A32%3A37Z&se=2024-06-05T10%3A32%3A37Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-06-04T10%3A39%3A53Z&ske=2024-06-05T10%3A39%3A53Z&sks=b&skv=2023-11-03&sig=C4Yavcx39QPZxrAdrgDdfUQ26/HNARfydETuNgL/AZE%3D";
+  //   "https://oaidalleapiprodscus.blob.core.windows.net/private/org-KXKumtFebzRZTj3qnvXNk0Ke/user-jk69vqRB1j9QjlqVUFVZQjiV/img-SMIhB7pmsSuukp2vI0QQbj9b.png?st=2024-06-05T09%3A40%3A25Z&se=2024-06-05T11%3A40%3A25Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-06-05T00%3A45%3A57Z&ske=2024-06-06T00%3A45%3A57Z&sks=b&skv=2023-11-03&sig=FfY1NcnlJ76xrD/VHcradtKZ9E4S/K5XlRZCz8BhG1o%3D";
 
   const imageResponse = await axios.get(imageUrl, {
     responseType: "arraybuffer",
@@ -45,9 +45,6 @@ async function main() {
   // console.log(stream?.choices[0]?.message?.content);
   const content = stream?.choices[0]?.message?.content;
 
-  const backgroundImage =
-    "https://www.accenture.com/t20210621T091907Z__w__/us-en/_acnmedia/Accenture/Redesign-Assets/DotCom/Images/Global/Thumbnail-480x270.jpg";
-
   const slidesContent = content
     .split("\n\n")
     .filter((slide) => slide.trim() !== "");
@@ -63,9 +60,8 @@ async function main() {
   for (let i = 0; i < slidesContent.length; i++) {
     console.log(`Generating slide ${i + 1} of ${slidesContent.length}`);
     const slide = pptx.addSlide();
-    slide.background = { data: backgroundImage, transparency: 50 };
 
-    // slide.background = { fill: colorSchemes[i % colorSchemes.length] };
+    slide.background = { fill: colorSchemes[i % colorSchemes.length] };
     slide.addText(slidesContent[i], {
       x: 0.5,
       y: 0.5,
